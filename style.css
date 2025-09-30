@@ -28,7 +28,12 @@ h1 {
   font-family: "Orbitron";
   box-shadow: rgba(0, 0, 0, 0.35) 0px 5px 15px;
   border-radius: 10px 0px;
+  min-width: 180px;
 }
+/* #timer{
+  color: red;
+  min-width: 100px;
+} */
 
 .btns {
   display: flex;
@@ -66,11 +71,14 @@ h1 {
   h1 {
     font-size: 1.5rem;
   }
+
   .display {
     background-color: limegreen;
     padding: 25px;
+    margin: 0px auto;
     font-size: 2.5rem;
     border-radius: 20px;
+    min-width: 270px;
   }
   .btns {
     border-radius: 10px;
@@ -95,8 +103,10 @@ h1 {
   .display {
     background-color: limegreen;
     border-radius: 20px;
-    padding: 60px;
+    padding: 50px;
     font-size: 3.5rem;
+    min-width: 410px;
+
   }
   h1 {
     font-size: 2.5rem;

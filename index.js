@@ -1,44 +1,63 @@
-// all HTML elememts
-let timer = document.getElementById("timer");
+// targeting all HTML elememts in the documnet
+let display = document.getElementById("timer");
 let startBtn = document.getElementById("startBtn");
 let resetBtn = document.getElementById("resetBtn");
 
-let hrs = 0;
-let mins = 0;
-let secs = 0
-let running = false;
-let interval = undefined
+//stopwatch state variables
 
-// declaring all my functions
+let hours = 0;
+let minutes = 0;
+let seconds = 0;
+let isRunning = false;
+let interval = null;
 
-
-const timerFormat = ()=>{
-    // returns the value
-    return num < 10 ? "0" + num : num;
-
-}
-
-const timerUpdate = ()=>{
-    timer.textContent = 
-    `${timerFormat(hr)}: ${timerFormat(mins)} : ${timerFormat(secs)}}`
-
-}
- 
-
-const handleStartBtn = () => {
-  startBtn.textContent = startBtn.textContent === "Start" ? "Stop" : "Start";
-   timer.textContent = "Started....";
+// updating timer
+const updateTimer = () => {
+  let h = hours < 10 ? "0" + hours : hours;
+  let m = minutes < 10 ? "0" + minutes : minutes;
+  let s = seconds < 10 ? "0" + seconds : seconds;
+  display.textContent = `${h}:${m}:${s}`;
 };
 
-// change text
+// start stopwatch
+const startStopwatch = () => {
+  startBtn.textContent = startBtn.textContent === "Start" ? "Stop" : "Start";
 
+  // start timer
+  if (!isRunning) {
+    isRunning = true;
+    interval = setInterval(() => {
+      seconds++;
+      if (seconds === 60) {
+        seconds = 0;
+        minutes++;
+      }
+      if (minutes === 60) {
+        minutes = 0;
+        hours++;
+      }
+      updateTimer();
+    }, 1000);
+  }
 
+  // stop timer
+  else {
+    clearInterval(interval);
+    isRunning = false;
+  }
+};
 
-const handleResetBtn = () => {
-  timer.innerText = "00:00:00";
+// reset timer
+const resetTimer = () => {
+  clearInterval(interval);
+  isRunning = false;
+  hours = 0;
+  minutes = 0;
+  seconds = 0;
+  updateTimer();
   startBtn.textContent = "Start";
 };
 
-
-startBtn.addEventListener("click", handleStartBtn);
-resetBtn.addEventListener("click", handleResetBtn);
+// event listeners
+startBtn.addEventListener("click", startStopwatch);
+resetBtn.addEventListener("click", resetTimer);

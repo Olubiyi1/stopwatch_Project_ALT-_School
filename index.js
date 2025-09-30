@@ -26,6 +26,7 @@ const startStopwatch = () => {
   // start timer
   if (!isRunning) {
     isRunning = true;
+    // run the run repeatedly every 1sec
     interval = setInterval(() => {
       seconds++;
       if (seconds === 60) {
